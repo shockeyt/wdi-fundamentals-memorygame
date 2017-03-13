@@ -30,34 +30,70 @@ var cards =
 			}	
 	];
 var cardsInPlay = [];
-var cardOne;
+//var cardOne;
 /*
 var cardOne = "User flipped " + cards[2];
 cardsInPlay.push(cardOne);
 */
-var cardTwo;
+//var cardTwo;
 /*
 var cardTwo = "User flipped " + cards[3];
 cardsInPlay.push(cardTwo);
 */
 
 var checkForMatch = function() {
-	if (cardsInPlay[0] === cardsInPlay[1]) {
+	for (var i = 2; i === cardsInPlay.length; i++) {
+		//console.log("length is two");
+		// alt option cards[cardId].cardImage.setAttribute();
+		//cards[cardId].cardImage = this.setAttribute(src);
+		if (cardsInPlay[0] === cardsInPlay[1]) {
+			alert("You found a match!");
+		}
+		else {
+			alert("Sorry, try again.");
+		}
+		
+	}
+	/*if (cardsInPlay[0] === cardsInPlay[1]) {
 		console.log("You found a match!");
+		
 	}
 	else {
 		console.log("Sorry, try again.");
+		
+	}*/
+};
+
+var flipCard = function() {
+	var cardId = this.getAttribute('data-id');
+	console.log("User flipped " + cards[cardId].rank);
+	//my bad attribute attempt
+	//cards[cardId].cardImage = this.setAttribute(src);
+	this.setAttribute('src', (cards[cardId].cardImage));
+	cardsInPlay.push(cards[cardId].rank);
+	checkForMatch();
+	console.log(cards[cardId].cardImage);
+	console.log(cards[cardId].suit);
+	//cardId.setAttribute('src', cards[cardId].cardImage);
+};
+
+var createBoard = function() {
+	for (var i = 0; i < cards.length; i++) {
+		var cardElement = document.createElement('img');
+		cardElement.setAttribute('src', 'images/back.png');
+		cardElement.setAttribute('data-id', [i]);
+		cardElement.addEventListener('click', flipCard);
+		document.getElementById('game-board').appendChild(cardElement);
 	}
 };
 
-var flipCard = function(cardId) {
-	console.log("User flipped " + cards[cardId].rank);
-	cardsInPlay.push( cards[cardId].rank);
-	console.log(cards[cardId].cardImage);
-	console.log(cards[cardId].suit);
+createBoard();
 
-	for (var i = 2; i === cardsInPlay.length; i++) {
-		/*console.log("length is two");*/
+
+	/*for (var i = 2; i === cards.length; i++) {
+		//console.log("length is two");
+		// alt option cards[cardId].cardImage.setAttribute();
+		cards[cardId].cardImage = this.setAttribute(src);
 		if (cardsInPlay[0] === cardsInPlay[1]) {
 			alert("You found a match!");
 		}
@@ -65,6 +101,5 @@ var flipCard = function(cardId) {
 			alert("Sorry, try again.");
 		}
 		checkForMatch();
-	}
-};
+		}*/
 
